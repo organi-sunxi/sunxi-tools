@@ -187,10 +187,10 @@ int script_parse_fex(FILE *in, const char *filename, struct script *script)
 		char *s = skip_blank(buffer); /* beginning */
 		char *pe = s; /* \0... to be found */
 
-		if (*pe) while (*++pe)
+		if (*pe) while (*++pe && pe[-1] != ';')
 			;
 
-		if (pe>s && pe[-1] == '\n') {
+		if (pe>s && (pe[-1] == '\n' || pe[-1] == ';')) {
 			if (pe>s+1 && pe[-2] == '\r')
 				pe -= 2;
 			else
